@@ -21,7 +21,6 @@ const execProcess = (command) => {
                     if (err) throw err;
                 })
             }
-            console.log(roundCounter)
             roundCounter++;
 		});
 	}, 1000); // cannot do 100ms - PC freezes
