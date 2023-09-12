@@ -2,11 +2,11 @@ const os = require("os");
 const childProcess = require("child_process");
 const fs = require("fs");
 
-const execProcess = (command) => {
+const execProcess = (command, operatingSys) => {
     let roundCounter = 0;
 	setInterval(() => {
 		childProcess.exec(command, (error, stdout, stderr) => {
-			childProcess.execSync('powershell "Clear"');
+			operatingSys === "win32" ? childProcess.execSync('powershell "Clear"') : console.clear();
             process.stdout.write(`Process_Name - CPU Usage - RAM Usage\n`)
 			process.stdout.write(`${stdout}`);
 			stderr ? console.log(`stderr: ${stderr}`) : null;
@@ -27,12 +27,13 @@ const execProcess = (command) => {
 };
 
 // check operating system (tested only on Windows 10)
-if (os.platform() === "win32") {
+let currentOS = os.platform();
+if (currentOS === "win32") {
 	execProcess(
-		`powershell "Get-Process | Sort-Object CPU -Descending | Select-Object -Property Name, CPU, WorkingSet -First 1 | ForEach-Object { $_.Name + ' - ' + $_.CPU + ' - ' + $_.WorkingSet + ' bytes'}"`
+		`powershell "Get-Process | Sort-Object CPU -Descending | Select-Object -Property Name, CPU, WorkingSet -First 1 | ForEach-Object { $_.Name + ' - ' + $_.CPU + ' - ' + $_.WorkingSet + ' bytes'}"`, `win32`
 	);
-} else if (os.platform() === "darwin" || os.platform() === "linux") {
-	execProcess(`ps -A -o %cpu,%mem,comm | sort -nr | head -n 1`);
+} else if (currentOS === "darwin" || currentOS === "linux") {
+	execProcess(`ps -A -o %cpu,%mem,comm | sort -nr | head -n 1`, currentOS);
 } else {
 	console.log("OS not supported!");
 }
