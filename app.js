@@ -27,10 +27,10 @@ const execProcess = (command, operatingSys) => {
 };
 
 // check operating system (tested only on Windows 10)
-let currentOS = os.platform();
+const currentOS = os.platform();
 if (currentOS === "win32") {
 	execProcess(
-		`powershell "Get-Process | Sort-Object CPU -Descending | Select-Object -Property Name, CPU, WorkingSet -First 1 | ForEach-Object { $_.Name + ' - ' + $_.CPU + ' - ' + $_.WorkingSet + ' bytes'}"`, `win32`
+		`powershell "Get-Process | Sort-Object CPU -Descending | Select-Object -Property Name, CPU, WorkingSet -First 1 | ForEach-Object { $_.Name + ' - ' + $_.CPU + ' - ' + $_.WorkingSet + ' bytes'}"`, currentOS
 	);
 } else if (currentOS === "darwin" || currentOS === "linux") {
 	execProcess(`ps -A -o comm,%cpu,%mem | sort -nr | head -n 1`, currentOS);
