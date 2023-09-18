@@ -1,0 +1,17 @@
+{
+	"name": "module-3",
+	"version": "1.0.0",
+	"description": "",
+	"main": "task1.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"task1": "nodemon task1.js",
+		"task2": "nodemon task2.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"nodemon": "^3.0.1"
+	}
+}

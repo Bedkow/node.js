@@ -1,9 +1,5 @@
-//##### TASK 1 #####
-import { EventEmitter } from "events";
-
-// custom EventEmitter class
 class EventEmitter {
-	listeners = {}; // key-value pair
+	listeners = {};
 
 	addListener(eventName, fn) {
 		this.listeners[eventName] = this.listeners[eventName] || [];
