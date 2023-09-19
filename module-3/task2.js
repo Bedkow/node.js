@@ -76,7 +76,9 @@ class WithTime extends EventEmitter {
 }
 
 async function asyncFunc(pageNumber = 1) {
-	const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${pageNumber}`);
+	const response = await fetch(
+		`https://jsonplaceholder.typicode.com/posts/${pageNumber}`
+	);
 
 	if (!response.ok) {
 		throw new Error(`An exception occurred: ${response.status}`);
