@@ -1,8 +1,10 @@
 import axios from "axios";
 import { publicHolidays2023DE } from "../mockData/publicHolidays2023DE";
-import { getListOfPublicHolidays, checkIfTodayIsPublicHoliday, getNextPublicHolidays } from "./public-holidays.service";
-
-// unit tests
+import {
+	getListOfPublicHolidays,
+	checkIfTodayIsPublicHoliday,
+	getNextPublicHolidays,
+} from "./public-holidays.service";
 
 describe("Get a list of public holidays", () => {
 	it("gets public holidays in DE in 2023", async () => {
@@ -30,7 +32,5 @@ describe("Get a list of public holidays", () => {
 
 	afterEach(() => {
 		jest.clearAllMocks();
-	  });
+	});
 });
-
-// integration tests
