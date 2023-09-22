@@ -4,7 +4,7 @@ module.exports = {
 	roots: ["./src"],
 	passWithNoTests: true,
 	moduleNameMapper: {
-		"^axios$": "axios/dist/node/axios.cjs",
+		"axios": "axios/dist/axios.js",
 	},
 	testMatch: ["**/?(*.)test.ts"],
 	collectCoverageFrom: ["src/**/*.{ts}"],
