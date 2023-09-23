@@ -16,7 +16,6 @@ describe("Holidays API", () => {
 				"/NextPublicHolidaysWorldwide"
 			);
 			expect(status).toEqual(200);
-			// console.log(body)
 			expect(body.length).toBeGreaterThan(0);
 		});
 	});
