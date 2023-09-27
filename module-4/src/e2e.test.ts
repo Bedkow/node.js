@@ -17,6 +17,23 @@ describe("Holidays API", () => {
 			);
 			expect(status).toEqual(200);
 			expect(body.length).toBeGreaterThan(0);
+			expect(Array.isArray(body)).toStrictEqual(true);
+
+			const expectedFields = [
+				"date",
+				"localName",
+				"name",
+				"countryCode",
+				"fixed",
+				"global",
+				"counties",
+				"launchYear",
+				"types",
+			];
+
+			for (const item of body) {
+				expect(expectedFields).toEqual(Object.keys(item));
+			}
 		});
 	});
 });

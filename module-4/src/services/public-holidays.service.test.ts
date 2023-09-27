@@ -6,28 +6,34 @@ import {
 	getNextPublicHolidays,
 } from "./public-holidays.service";
 
-describe("Get a list of public holidays", () => {
-	it("gets public holidays in DE in 2023", async () => {
-		jest
-			.spyOn(axios, "get")
-			.mockImplementation(() =>
-				Promise.resolve({ data: publicHolidays2023DE })
-			);
+describe("public-holidays service test suite", () => {
+	describe("getListOfPublicHolidays function test", () => {
+		it("gets public holidays in DE in 2023", async () => {
+			jest
+				.spyOn(axios, "get")
+				.mockImplementation(() =>
+					Promise.resolve({ data: publicHolidays2023DE })
+				);
 
-		const holidaysResponse = await getListOfPublicHolidays(2023, "DE");
+			const holidaysResponse = await getListOfPublicHolidays(2023, "DE");
 
-		expect(holidaysResponse).toEqual(publicHolidays2023DE);
+			expect(holidaysResponse).toEqual(publicHolidays2023DE);
+		});
 	});
 
-	it("checks if today is public holiday in DE", async () => {
-		const isPublicHoliday = await checkIfTodayIsPublicHoliday("DE");
-		expect([true, false]).toContain(isPublicHoliday);
+	describe("checkIfTodayIsPublicHoliday function test", () => {
+		it("should return only boolean value", async () => {
+			const isPublicHoliday = await checkIfTodayIsPublicHoliday("DE");
+			expect([true, false]).toContain(isPublicHoliday);
+		});
 	});
 
-	it("gets next public holidays in DE", async () => {
-		const nextPublicHolidays = await getNextPublicHolidays("DE");
-		expect(Array.isArray(nextPublicHolidays)).toBe(true);
-		expect(nextPublicHolidays.length).toBeGreaterThan(0);
+	describe("getNextPublicHolidays function test", () => {
+		it("gets next public holidays in DE", async () => {
+			const nextPublicHolidays = await getNextPublicHolidays("DE");
+			expect(Array.isArray(nextPublicHolidays)).toBe(true);
+			expect(nextPublicHolidays.length).toBeGreaterThan(0);
+		});
 	});
 
 	afterEach(() => {
