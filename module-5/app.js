@@ -2,6 +2,15 @@ import http from "http";
 import url from "url";
 import users from "./data.js";
 
+// get data and calc next user id
+let takenIDs = [];
+for(let user of users) {
+	takenIDs.push(user.id);
+}
+takenIDs.sort((a, b) => b - a);
+let highestID = takenIDs[0];
+let nextUserID = ++highestID;
+
 const port = 3000;
 
 function getUsers(req, res) {
@@ -38,7 +47,7 @@ function createUser(req, res) {
 
 		if (name && email && hobbies) {
 			const newUser = {
-				id: users.length + 1,
+				id: nextUserID++,
 				name,
 				email,
 				hobbies,
