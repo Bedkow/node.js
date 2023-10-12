@@ -1,0 +1,1 @@
+// Or Service layer. The middle layer. All business logic related to our application might be in this layer. This layer knows about our application entities such as user, order, comment, post, and so on. It doesn't care what protocol is used for transferring data to a client, or whether data will be sent in a body or in a header.
