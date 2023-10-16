@@ -8,7 +8,7 @@ app.use(express.json());
 const PORT: number = 3500 || process.env.PORT;
 
 const mainRouter = router;
-app.use('/', mainRouter);
+app.use('/api', mainRouter);
 
 app.listen(PORT, () => {
     console.log(`express listening on port ${PORT}`)
