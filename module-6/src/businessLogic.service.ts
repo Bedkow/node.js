@@ -22,7 +22,7 @@ export const findCartByUserID = (id: string): CartEntity | undefined => {
 	return foundCart;
 }
 
-export const validateCartSchema = (cartObject: any): any => {
+export const validateCartSchema = (cartObject: CartEntity): any => {
 	const schema = Joi.object({
 		id: Joi.string().required(),
 		userID: Joi.string().required(),
@@ -33,8 +33,8 @@ export const validateCartSchema = (cartObject: any): any => {
 	const validationResult = schema.validate(cartObject);
 
 	if (validationResult.error) {
-		return validationResult.error.details;
+		return {code: 400, error: validationResult.error.details};
 	} else {
-		return validationResult.value;
+		return {code: 200, value: validationResult.value};
 	}
 }

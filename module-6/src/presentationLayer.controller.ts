@@ -1,8 +1,8 @@
 //The highest layer. This layer should contain logic related to a presentation of our application to a client. For example, this layer can have logic related to the protocol that was chosen for the application. This layer knows what is HTTP request, response, header, body, socket, internet, and so on.
 
 import express from 'express';
-import { getAllProducts } from './dataAccess.repository.ts';
-import { findProductByID, findCartByUserID } from './businessLogic.service.ts';
+import { getAllProducts, updateCreateCart } from './dataAccess.repository.ts';
+import { findProductByID, findCartByUserID, validateCartSchema } from './businessLogic.service.ts';
 import { customError } from './helpers/customError.ts';
 
 const router = express.Router();
@@ -43,5 +43,18 @@ router.get('/profile/cart/:userID', (req, res) => {
         res.json({error: "Internal Server Error"});
     }
 });
+
+//create/update cart
+router.put('/profile/cart', (req, res) => {
+    const validationResult = validateCartSchema(req.body);
+    if (validationResult.code === 400) {
+        res.status(validationResult.code);
+        res.json({error: validationResult.error});
+    } else if (validationResult.code === 200) {
+        const resObj: {code: number, message: string} = updateCreateCart(req.body);
+        res.status(resObj.code);
+        res.json({message: resObj.message})
+    }
+})
 
 export default router

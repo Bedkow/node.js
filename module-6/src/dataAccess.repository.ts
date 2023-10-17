@@ -44,23 +44,37 @@ export const getAllCarts = (): CartEntity[] | [] => {
 	return JSON.parse(allCarts);
 };
 
-export const updateCreateCart = (cartObject: CartEntity): number => {
-	const allCarts = getAllCarts();
-	const foundCart = allCarts.find((cart: any) => {
+export const updateCreateCart = (cartObject: CartEntity): {code: number, message: string} => {
+	const allCarts: CartEntity[] = getAllCarts();
+	const foundCart: CartEntity | undefined = allCarts.find((cart: any) => {
 		return cart.id === cartObject.id;
 	});
 	if (foundCart) {
-		const cartIndex = allCarts.findIndex((cart: any) => {
+		const cartIndex: number = allCarts.findIndex((cart: any) => {
 			return cart.id === cartObject.id;
 		});
-		const cartKeysToUpdate = Object.keys(cartObject);
+		const cartKeysToUpdate: string[] = Object.keys(cartObject);
 		cartKeysToUpdate.forEach((key: string) => {
-
 			(allCarts[cartIndex] as any)[key as keyof CartEntity] =
 				cartObject[key as keyof CartEntity];
 		});
-		return 200;
+		fs.writeFile(
+			path.resolve(__dirname, "./data/carts.json"),
+			JSON.stringify(allCarts),
+			(err) => {
+				if (err) throw err;
+			}
+		);
+		return {code: 200, message: "Cart updated"};
 	} else {
-		return 404;
+		allCarts.push(cartObject);
+		fs.writeFile(
+			path.resolve(__dirname, "./data/carts.json"),
+			JSON.stringify(allCarts),
+			(err) => {
+				if (err) throw err;
+			}
+		);
+		return {code: 201, message: "Cart created"};
 	}
 };
