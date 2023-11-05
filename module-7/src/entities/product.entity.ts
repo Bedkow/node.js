@@ -5,7 +5,7 @@ import {
   ManyToOne,
 } from "@mikro-orm/core";
 import { CartEntity } from "./cart.entity.ts";
-import { OrderEntity } from "./order.entity.ts"; // Import OrderEntity
+import { OrderEntity } from "./order.entity.ts";
 
 @Entity({ tableName: "products" })
 export class ProductEntity {

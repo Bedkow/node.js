@@ -15,3 +15,21 @@ export const dbContext = async () => {
     cartsRepository: orm.em.getRepository(CartsRepository),
   };
 };
+
+interface UpdateCreateCartResponse {
+	code: number;
+	message: string;
+  }
+  
+  export async function updateCreateCart(cartData: any, cartsRepository: CartsRepository): Promise<UpdateCreateCartResponse> {
+  
+	const existingCart = await cartsRepository.findCartByUserID(cartData.userId);
+  
+	if (existingCart) {
+	  await cartsRepository.updateCart(cartData);
+	  return { code: 200, message: 'Cart updated successfully.' };
+	} else {
+	  await cartsRepository.createCart(cartData);
+	  return { code: 201, message: 'Cart created successfully.' };
+	}
+  }

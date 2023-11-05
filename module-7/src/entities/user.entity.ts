@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property, ManyToOne, Collection, OneToMany } from "@mikro-orm/core";
 
-@Entity({ tableName: "users" }) // Include entity settings object here
+@Entity({ tableName: "users" })
 export class UserEntity {
   @PrimaryKey()
   id!: number;
