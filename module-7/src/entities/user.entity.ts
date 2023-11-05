@@ -1,8 +1,16 @@
-export interface UserEntity {
-    id: string; // uuid
-  }
-  
-  const user: UserEntity = {
-    id: '0fe36d16-49bc-4aab-a227-f84df899a6cb'
-  }
-  
+import { Entity, PrimaryKey, Property, ManyToOne, Collection, OneToMany } from "@mikro-orm/core";
+
+@Entity({ tableName: "users" }) // Include entity settings object here
+export class UserEntity {
+  @PrimaryKey()
+  id!: number;
+
+  @Property()
+  name!: string;
+
+  @Property()
+  email!: string;
+
+  @Property()
+  password!: string;
+}

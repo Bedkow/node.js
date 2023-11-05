@@ -1,28 +1,25 @@
-import { ProductEntity, product as bookProduct } from './product.entity.ts'
+import {
+  Entity,
+  PrimaryKey,
+  Property,
+  ManyToOne,
+  Collection,
+  OneToMany,
+} from "@mikro-orm/core";
+import { UserEntity } from "./user.entity.ts";
+import { ProductEntity } from "./product.entity.ts";
 
-// export interface CartItemEntity {
-//   product: ProductEntity;
-//   count: number;
-// }
+@Entity()
+export class CartEntity {
+  @PrimaryKey()
+  id!: number;
 
-export interface CartEntity {
-  id?: string; // uuid
-  userId?: string;
-  isDeleted?: boolean;
-  items?: any[];
-}
+  @ManyToOne(() => UserEntity)
+  user!: UserEntity;
 
-// const cartItem: CartItemEntity = {
-//   product: bookProduct,
-//   count: 2,
-// }
+  @OneToMany(() => ProductEntity, (product) => product.cart, { eager: true })
+  items = new Collection<ProductEntity[]>(this);
 
-export const cart: CartEntity = {
-  id: '1434fec6-cd85-420d-95c0-eee2301a971d',
-  userId: '0fe36d16-49bc-4aab-a227-f84df899a6cb',
-  isDeleted: false,
-  items: [{
-      product: bookProduct,
-      count: 2,
-    }]
+  @Property()
+  createdAt: Date = new Date();
 }

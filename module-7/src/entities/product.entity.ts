@@ -1,14 +1,32 @@
-export interface ProductEntity {
-    id: string; // uuid
-    title: string;
-    description: string;
-    price: number;
-  }
-  
-  export const product: ProductEntity = {
-    id: '51422fcd-0366-4186-ad5b-c23059b6f64f',
-    title: 'Book',
-    description: 'A very interesting book',
-    price: 100
-  }
-  
+import {
+  Entity,
+  PrimaryKey,
+  Property,
+  ManyToOne,
+} from "@mikro-orm/core";
+import { CartEntity } from "./cart.entity.ts";
+import { OrderEntity } from "./order.entity.ts"; // Import OrderEntity
+
+@Entity({ tableName: "products" })
+export class ProductEntity {
+  @PrimaryKey()
+  id!: number;
+
+  @Property()
+  name!: string;
+
+  @Property()
+  description!: string;
+
+  @Property()
+  price!: number;
+
+  @Property()
+  categoryId!: number;
+
+  @ManyToOne(() => CartEntity)
+  cart!: CartEntity;
+
+  @ManyToOne(() => OrderEntity)
+  order!: OrderEntity;
+}

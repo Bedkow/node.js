@@ -12,10 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@mikro-orm/core": "^5.9.2",
+    "@mikro-orm/migrations": "^5.9.2",
+    "@mikro-orm/nestjs": "^5.2.2",
+    "@mikro-orm/postgresql": "^5.9.2",
     "@types/swagger-ui-dist": "^3.30.2",
     "express": "^4.18.2",
     "joi": "^17.11.0",
     "lodash": "^4.17.21",
+    "mikro-orm": "^5.9.2",
+    "pg": "^8.11.3",
     "swagger-ui-dist": "^5.9.0",
     "typescript": "^5.2.2"
   },
@@ -23,6 +29,7 @@
     "@types/express": "^4.17.18",
     "@types/lodash": "^4.14.199",
     "@types/node": "^20.8.2",
+    "@types/pg": "^8.10.7",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1"
   }

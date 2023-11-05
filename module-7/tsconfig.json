@@ -10,7 +10,10 @@
     "strict": true,
     "baseUrl": "./",
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false
   },
 
   "ts-node": {
