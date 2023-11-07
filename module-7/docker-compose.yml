@@ -1,7 +1,7 @@
-version: '3'
+version: '3.9'
 services:
   postgres-db:
-    image: "postgres:12"
+    image: "postgres:15.4-alpine"
     container_name: "node-gmp-db"
     environment:
       - POSTGRES_USER=node_gmp
@@ -9,4 +9,4 @@ services:
       - POSTGRES_DB=node_gmp
     restart: always
     ports:
-      - '5432:5432'
+      - 5432:5432

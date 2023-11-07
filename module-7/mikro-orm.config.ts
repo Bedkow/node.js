@@ -11,16 +11,21 @@ import { Options } from "@mikro-orm/core";
 
 export default {
   entities: [ProductEntity, UserEntity, OrderEntity, CartEntity],
-  dbName: process.env.DATABASE_URL,
-  debug: process.env.DEBUG,
+  dbName: process.env.DB_NAME,
+  debug: process.env.DEBUG === "true",
   type: "postgresql",
   migrations: {
     tableName: "mikro_orm_migrations",
     path: "./migrations",
   },
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  port: 5432,
-  host: "localhost",
-  repositories: [ProductsRepository, OrdersRepository, UsersRepository, CartsRepository],
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  host: process.env.DB_HOST,
+  repositories: [
+    ProductsRepository,
+    OrdersRepository,
+    UsersRepository,
+    CartsRepository,
+  ],
 } as Options;
