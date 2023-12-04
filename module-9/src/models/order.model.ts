@@ -1,0 +1,19 @@
+import { Schema, Document, Types } from 'mongoose';
+import { UserModel } from './user.model.ts';
+import { ProductModel } from './product.model.ts';
+
+export interface OrderModel extends Document {
+  id: number;
+  user: Types.ObjectId | UserModel;
+  items: Types.DocumentArray<ProductModel>;
+  createdAt: Date;
+}
+
+const OrderSchema = new Schema<OrderModel>({
+  id: { type: Number, required: true },
+  user: { type: Types.ObjectId, ref: 'User', required: true },
+  items: [{ type: Types.ObjectId, ref: 'Product', required: true }],
+  createdAt: { type: Date, default: Date.now },
+});
+
+export { OrderSchema };
