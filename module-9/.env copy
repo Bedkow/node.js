@@ -1,6 +1,0 @@
-DEBUG=true
-DB_NAME=node_gmp
-DB_USER=node_gmp
-DB_PASSWORD=password123
-DB_PORT=4000
-DB_HOST=127.0.0.1
